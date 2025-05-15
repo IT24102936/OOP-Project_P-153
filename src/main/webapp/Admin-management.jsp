@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Admin Profile</title>
+  <!-- Custom css -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin-managment.css">
   <link rel="stylesheet" href="<%=request.getContextPath()%>css/admin-navbar.css">
   <!-- Font Awesome CDN -->
