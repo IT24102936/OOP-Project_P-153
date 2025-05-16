@@ -26,6 +26,8 @@
 <main>
   <%@ include file="navbar.jsp" %>
 
+
+
       <%
   // Check if the user is logged in
   String loginId = (String) session.getAttribute("username");
