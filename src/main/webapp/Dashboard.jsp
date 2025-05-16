@@ -21,10 +21,14 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/navbarandfooter.css">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">
 
+
+
 </head>
 <body>
 <main>
   <%@ include file="navbar.jsp" %>
+
+
 
       <%
   // Check if the user is logged in
