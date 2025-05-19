@@ -19,22 +19,16 @@ body {
 main {
     flex: 1;
     padding: 1.5rem;
-    min-height: calc(100vh - 60px);
-    overflow: auto;
-    clear: both;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #ececec;
+    background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    min-height: 100vh; /* Ensures vertical centering */
+    overflow: hidden;
 }
 
 h2 {
@@ -70,7 +64,7 @@ h4 {
 }
 
 /* Button Styles */
-button.btn {
+button .btn {
     background-color: #1a2a44;
     color: white;
     padding: 0.5rem 1rem;
@@ -118,88 +112,91 @@ footer {
     color: #1976D2;
 }
 
-/* Form Card Styles */
-.form-card {
-    width: 50%;
-    margin-left: 25%;
-    background: white;
+/* Admin Profile Card for Sections */
+.admin-profile-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-in;
 }
 
-.form-card form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+
+/* Form Styles for Add Admin */
+.admin-profile-form {
+    width: 45%;
+    margin: 0 auto;
 }
 
-.form-card label {
+.admin-profile-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.admin-profile-form label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #333;
-    font-size: 1.1rem;
+    color: #1a2a44;
 }
 
-.form-card input,
-.form-card textarea {
-    padding: 0.75rem;
-    border: 2px solid #ddd;
+.admin-profile-form .input-wrapper {
+    position: relative;
+}
+
+.admin-profile-form .input-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.admin-profile-form input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    color: #333;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.form-card input:focus,
-.form-card textarea:focus {
+.admin-profile-form input:focus {
     border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
     outline: none;
 }
 
-.form-card input.error,
-.form-card textarea.error {
-    border-color: #f44336;
-}
-
-.form-card textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.form-card button {
+.update-profile-btn {
+    width: 100%;
     padding: 0.75rem;
+    background-color: #2196F3;
+    color: white;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.form-card button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
+.update-profile-btn:hover {
+    background-color: #1976D2;
+    transform: scale(1.02);
 }
 
-.form-card button.loading {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Table Styles */
+/* Table Styles for Admin List */
 .table-container {
     overflow-x: auto;
     margin-bottom: 2rem;
 }
 
 table {
-    width: 100%; /* Set table width to 100% */
+    width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     overflow: hidden;
 }
 
@@ -248,6 +245,15 @@ td {
     transform: scale(1.05);
 }
 
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
 .delete-btn {
     background-color: #f44336;
     color: white;
@@ -255,125 +261,6 @@ td {
 
 .delete-btn:hover {
     background-color: #da190b;
-}
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50; /* Success green */
-    color: white;
-    padding: 1.5rem 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 1000; /* Ensure it stays above other content */
-    max-width: 400px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.toast.error {
-    background-color: #f44336; /* Error red */
-}
-
-.toast .close-btn {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.toast .close-btn:hover {
-    color: #ccc;
-}
-
-.toast-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-}
-
-.dark-mode-toggle:hover {
-    background: #555;
-}
-
-body.dark-mode {
-    background: #1a1a1a;
-    color: #ddd;
-}
-
-body.dark-mode .form-card {
-    background: #2a2a2a;
-}
-
-body.dark-mode .form-card label {
-    color: #ddd;
-}
-
-body.dark-mode .form-card input,
-body.dark-mode .form-card textarea {
-    background: #333;
-    color: #ddd;
-    border-color: #555;
-}
-
-body.dark-mode .form-card input:focus,
-body.dark-mode .form-card textarea:focus {
-    border-color: #3b82f6;
-}
-
-body.dark-mode table {
-    background: #2a2a2a;
-}
-
-body.dark-mode td {
-    color: #ddd;
-}
-
-body.dark-mode tr:hover {
-    background: #3a3a3a;
-}
-
-body.dark-mode .toast {
-    background-color: #388E3C; /* Dark mode success green */
-}
-
-body.dark-mode .toast.error {
-    background-color: #D32F2F; /* Dark mode error red */
 }
 
 /* Responsive Adjustments */
@@ -386,7 +273,7 @@ body.dark-mode .toast.error {
         font-size: 2rem;
     }
 
-    .form-card {
+    .admin-profile-card {
         padding: 1.5rem;
     }
 }
@@ -401,17 +288,19 @@ body.dark-mode .toast.error {
         text-align: center;
     }
 
-    .form-card {
+    .admin-profile-card {
         padding: 1rem;
     }
 
-    .form-card input,
-    .form-card textarea {
+
+
+    .admin-profile-form input {
         font-size: 0.9rem;
     }
 
-    .form-card button {
+    .update-profile-btn {
         font-size: 0.9rem;
+
     }
 
     table {
@@ -423,13 +312,5 @@ body.dark-mode .toast.error {
     th, td {
         padding: 0.5rem;
         font-size: 0.8rem;
-    }
-
-    .toast {
-        bottom: 10px;
-        right: 10px;
-        padding: 1rem 1.5rem;
-        max-width: 90%;
-        font-size: 0.9rem;
     }
 }
