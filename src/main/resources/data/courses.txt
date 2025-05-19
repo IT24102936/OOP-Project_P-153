@@ -11,3 +11,14 @@ TE2238,Introduction to Cybersecurity,Isuru Liyanage,Technology,Learn the basics 
 TE3472,Cloud Computing Fundamentals,Amaya De Silva,Technology,Explore cloud technologies like AWS Azure and Google Cloud Understand how cloud storage virtual machines and services work in modern computing.,/course_img/TE3472.png
 TE4785,Internet of Things (IoT) Essentials,Chamara Weerasinghe,Technology,Get introduced to IoT devices sensors and connectivity Learn how smart technology works and how it is used in homes cities and industries.,/course_img/TE4785.png
 
+
+
+
+
+
+
+
+
+
+
+

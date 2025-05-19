@@ -4,31 +4,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
     background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
     color: #333;
 }
 
-/* Main Content */
 main {
-    flex: 1;
+    flex: 1 0 auto;
     padding: 1.5rem;
 }
 
 .container {
     padding: 2rem;
-    max-width: 1200px;
+    width: 95%;
     margin: 0 auto;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
 }
 
 h2 {
@@ -64,7 +60,7 @@ h4 {
 }
 
 /* Button Styles */
-button .btn {
+button, .btn {
     background-color: #1a2a44;
     color: white;
     padding: 0.5rem 1rem;
@@ -80,6 +76,15 @@ button .btn {
 button:hover, .btn:hover {
     background-color: #2a3a54;
     transform: scale(1.05);
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    margin-left: 0.5rem;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
 }
 
 /* Footer Styles */
@@ -112,91 +117,77 @@ footer {
     color: #1976D2;
 }
 
-/* Admin Profile Card for Sections */
-.admin-profile-card {
-    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+/* Search Bar Styles */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 2rem;
-    animation: fadeIn 0.5s ease-in;
 }
 
-
-/* Form Styles for Add Admin */
-.admin-profile-form {
-    width: 45%;
-    margin: 0 auto;
-}
-
-.admin-profile-form .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-.admin-profile-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #1a2a44;
-}
-
-.admin-profile-form .input-wrapper {
+.search-bar {
+    display: flex;
+    align-items: center;
     position: relative;
+    width: 300px;
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: width 0.4s ease-in-out, box-shadow 0.3s ease;
 }
 
-.admin-profile-form .input-wrapper i {
+.search-bar:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar i {
     position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 15px;
     color: #666;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
-.admin-profile-form input {
+.search-bar:hover i {
+    color: #3b82f6;
+}
+
+.search-bar input {
     width: 100%;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.admin-profile-form input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-    outline: none;
-}
-
-.update-profile-btn {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #2196F3;
-    color: white;
+    padding: 12px 20px 12px 45px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    color: #333;
+    background: transparent;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.update-profile-btn:hover {
-    background-color: #1976D2;
-    transform: scale(1.02);
+.search-bar input:focus {
+    width: 400px;
+    border-color: #3b82f6;
 }
 
-/* Table Styles for Admin List */
+.search-bar input::placeholder {
+    color: #999;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* Table Styles */
 .table-container {
     overflow-x: auto;
     margin-bottom: 2rem;
 }
 
 table {
-    width: 100%;
+    width: 120%;
+    margin: 0 100px 0 -130px;
     border-collapse: collapse;
     background-color: white;
     border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
@@ -205,6 +196,28 @@ th, td {
     text-align: left;
     font-size: 0.9rem;
     border-bottom: 1px solid #e0e0e0;
+}
+
+td input.edit-mode {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+td input.image-upload {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.image-column {
+    display: none; /* Hide by default */
 }
 
 th {
@@ -273,8 +286,27 @@ td {
         font-size: 2rem;
     }
 
-    .admin-profile-card {
-        padding: 1.5rem;
+    th, td {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    td input.edit-mode {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    td input.image-upload {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .search-bar {
+        width: 250px;
+    }
+
+    .search-bar input:focus {
+        width: 350px;
     }
 }
 
@@ -283,34 +315,38 @@ td {
         font-size: 1.8rem;
     }
 
-    .footer-section {
-        min-width: 100%;
-        text-align: center;
-    }
-
-    .admin-profile-card {
+    .container {
         padding: 1rem;
     }
 
-
-
-    .admin-profile-form input {
-        font-size: 0.9rem;
+    .search-bar {
+        width: 200px;
     }
 
-    .update-profile-btn {
-        font-size: 0.9rem;
-
+    .search-bar input:focus {
+        width: 280px;
     }
 
     table {
         display: block;
+        width: 100%;
         overflow-x: auto;
         white-space: nowrap;
+        margin-bottom: 2rem;
     }
 
     th, td {
         padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    td input.edit-mode {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    td input.image-upload {
+        padding: 0.3rem;
         font-size: 0.8rem;
     }
 }
