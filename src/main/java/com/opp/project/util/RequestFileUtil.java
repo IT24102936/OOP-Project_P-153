@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RequestFileUtil {
     private static final String USER_HOME = System.getProperty("user.home");
-    private static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OPP-Project_P-153/src/main/resources/data";
+    private static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OOP-Project_P-153/src/main/resources/data";
     private static final String REQUESTS_FILE_PATH = APP_DATA_DIR + File.separator + "requests.txt";
     private static final String ENROLLMENTS_FILE_PATH = APP_DATA_DIR + File.separator + "enrollments.txt";
 

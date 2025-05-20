@@ -12,37 +12,32 @@ import java.io.IOException;
 public class ProcessRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestIdStr = request.getParameter("requestId");
         String action = request.getParameter("action");
 
-        if (requestIdStr == null || action == null) {
-            response.sendRedirect("Admin-requestlist.jsp?errorMessage=Invalid request data");
+        if (action == null) {
+            response.sendRedirect("Admin-requestlist.jsp?errorMessage=Invalid action");
             return;
         }
 
         try {
-            int requestId = Integer.parseInt(requestIdStr);
             switch (action) {
                 case "approve":
-                    QueueManager.approveRequest(requestId);
-                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Request " + requestId + " approved successfully");
+                    QueueManager.approveFrontRequest();
+                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Front request approved successfully");
                     break;
                 case "reject":
-                    QueueManager.updateRequestStatus(requestId, "rejected");
-                    QueueManager.removeRequest(requestId);
-                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Request " + requestId + " rejected successfully");
+                    QueueManager.rejectFrontRequest();
+                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Front request rejected successfully");
                     break;
                 case "delete":
-                    QueueManager.removeRequest(requestId);
-                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Request " + requestId + " deleted successfully");
+                    QueueManager.deleteFrontRequest();
+                    response.sendRedirect("Admin-requestlist.jsp?successMessage=Front request deleted successfully");
                     break;
                 default:
                     response.sendRedirect("Admin-requestlist.jsp?errorMessage=Invalid action");
             }
-        } catch (NumberFormatException e) {
-            response.sendRedirect("Admin-requestlist.jsp?errorMessage=Invalid request ID");
         } catch (Exception e) {
-            response.sendRedirect("Admin-requestlist.jsp?errorMessage=Error processing request: " + e.getMessage());
+            response.sendRedirect("Admin-requestlist.jsp?errorMessage=Error processing front request: " + e.getMessage());
         }
     }
 }
