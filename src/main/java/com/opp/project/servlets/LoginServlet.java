@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userIdentifier", loginId);
             session.setAttribute("username", adminUsername); // Store the actual username
             session.setAttribute("isAdmin", true); // Mark as admin
-            // Redirect to Admin Dashboard
+
             response.sendRedirect("/Admin-dashboard.jsp");
         } else {
             // If not an admin, validate student credentials
@@ -44,9 +44,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userIdentifier", loginId);  // Store the login ID (email or username)
                 session.setAttribute("username", username);       // Store the actual username
                 session.setAttribute("studentId", studentId);
-                session.setAttribute("isAdmin", false);          // Mark as non-admin
+                session.setAttribute("isAdmin", false);
 
-                // Redirect to the student dashboard
+
                 response.sendRedirect("/Dashboard.jsp");
             } else {
                 // If login fails, send back to login page with an error message
@@ -63,14 +63,14 @@ public class LoginServlet extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 5) { // Expecting id,name,username,email,password
-                    String storedUsername = parts[2];  // Username is the third field
-                    String storedEmail = parts[3];     // Email is the fourth field
-                    String storedPassword = parts[4];  // Password is the fifth field
+                    String storedUsername = parts[2];
+                    String storedEmail = parts[3];
+                    String storedPassword = parts[4];
                     // Check if loginId matches username or email
                     if (storedUsername.equals(loginId) || storedEmail.equals(loginId)) {
                         // Compare the entered password with the stored hashed password
                         if (BCrypt.checkpw(password, storedPassword)) {
-                            return true; // Password matches
+                            return true;
                         }
                     }
                 }
@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
         } catch (IOException e) {
             System.err.println("Error reading admin.txt: " + e.getMessage());
         }
-        return false; // Credentials don't match
+        return false;
     }
 
     // Method to retrieve the admin username based on loginId (email or username)
@@ -88,8 +88,8 @@ public class LoginServlet extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 5) {
-                    String storedUsername = parts[2];  // Username is the third field
-                    String storedEmail = parts[3];     // Email is the fourth field
+                    String storedUsername = parts[2];
+                    String storedEmail = parts[3];
                     if (storedUsername.equals(loginId) || storedEmail.equals(loginId)) {
                         return storedUsername; // Return the actual username
                     }
@@ -108,14 +108,14 @@ public class LoginServlet extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 9) { // Ensure the line has enough fields (studentId added)
-                    String storedUsername = parts[2];  // Username is the third field
-                    String storedEmail = parts[4];     // Email is the fifth field
-                    String storedPassword = parts[7];  // Password is the eighth field
+                    String storedUsername = parts[2];
+                    String storedEmail = parts[4];
+                    String storedPassword = parts[7];
                     // Check if loginId matches username or email
                     if (storedUsername.equals(loginId) || storedEmail.equals(loginId)) {
                         // Compare the entered password with the stored hashed password
                         if (BCrypt.checkpw(password, storedPassword)) {
-                            return true; // Password matches
+                            return true;
                         }
                     }
                 }
@@ -123,7 +123,7 @@ public class LoginServlet extends HttpServlet {
         } catch (IOException e) {
             System.err.println("Error reading students.txt: " + e.getMessage());
         }
-        return false; // Credentials don't match
+        return false;
     }
 
     // Method to retrieve the student username based on loginId (email or username)
@@ -133,8 +133,8 @@ public class LoginServlet extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 9) {
-                    String storedUsername = parts[2];  // Username is the third field
-                    String storedEmail = parts[4];     // Email is the fifth field
+                    String storedUsername = parts[2];
+                    String storedEmail = parts[4];
                     if (storedUsername.equals(loginId) || storedEmail.equals(loginId)) {
                         return storedUsername; // Return the actual username
                     }
@@ -151,8 +151,8 @@ public class LoginServlet extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 9) {
-                    String storedUsername = parts[2];  // Username is the third field
-                    String storedEmail = parts[4];     // Email is the fifth field
+                    String storedUsername = parts[2];
+                    String storedEmail = parts[4];
                     String studentID = parts[0];
                     if (storedUsername.equals(loginId) || storedEmail.equals(loginId)) {
                         return studentID; // Return the actual username
