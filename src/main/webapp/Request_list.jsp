@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.opp.project.service.QueueManager" %>
+<%@ page import="com.opp.project.util.CourseFileUtil" %>
+<%@ page import="com.opp.project.util.FileUtil" %>
+<%@ page import="com.opp.project.model.Student" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +32,30 @@
             response.sendRedirect("Login.jsp");
             return;
         }
+
+        // Map loginId (username) to studentId using students.txt
+        String studentId = null;
+        List<Student> students = FileUtil.readStudents();
+        for (Student student : students) {
+            if (student.getUsername().equals(loginId)) {
+                studentId = String.valueOf(student.getStudentId());
+                break;
+            }
+        }
+        if (studentId == null) {
+            studentId = loginId; // Fallback if no mapping found
+        }
+
+        // Fetch course details to map courseId to course name and instructor
+        Map<String, String[]> courseDetails = new HashMap<>();
+        try {
+            List<String[]> courses = CourseFileUtil.readCourses();
+            for (String[] course : courses) {
+                courseDetails.put(course[0], new String[]{course[1], course[2]});
+            }
+        } catch (Exception e) {
+            // Error handling without logging
+        }
     %>
     <div class="card custom-card">
         <div class="card-body">
@@ -39,41 +70,44 @@
                 </tr>
                 </thead>
                 <tbody>
+                <%
+                    List<String[]> requests = QueueManager.getQueueState();
+                    boolean hasRequests = false;
+                    for (String[] req : requests) {
+                        try {
+                            String reqStudentId = req[1];
+                            String status = req[4];
+                            if (studentId != null && reqStudentId != null && reqStudentId.equals(studentId) && status.equals("pending")) {
+                                hasRequests = true;
+                                String courseId = req[2];
+                                String timestamp = req[3];
+                                String[] courseInfo = courseDetails.getOrDefault(courseId, new String[]{"Unknown Course", "Unknown Instructor"});
+                                String courseName = courseInfo[0];
+                                String instructorName = courseInfo[1];
+                %>
                 <tr>
-                    <td>SE1120</td>
-                    <td>Web Development</td>
-                    <td>Prof.Namal</td>
-                    <td>2025/05/10</td>
-                    <td><span class="badge bg-success-subtle text-success">Active</span></td>
+                    <td><%= courseId %></td>
+                    <td><%= courseName %></td>
+                    <td><%= instructorName %></td>
+                    <td><%= timestamp %></td>
+                    <td>
+                        <span class="badge bg-warning-subtle text-warning">Pending</span>
+                    </td>
                 </tr>
+                <%
+                            }
+                        } catch (Exception e) {
+                            // Error handling without logging
+                        }
+                    }
+                    if (!hasRequests) {
+                %>
                 <tr>
-                    <td>SE1120</td>
-                    <td>Web Development</td>
-                    <td>Prof.Namal</td>
-                    <td>2025/05/10</td>
-                    <td><span class="badge bg-warning-subtle text-warning">Pending</span></td>
+                    <td colspan="5" class="text-center">No pending requests found.</td>
                 </tr>
-                <tr>
-                    <td>SE1120</td>
-                    <td>Web Development</td>
-                    <td>Prof.Namal</td>
-                    <td>2025/05/10</td>
-                    <td><span class="badge bg-danger-subtle text-danger">Cancel</span></td>
-                </tr>
-                <tr>
-                    <td>SE1120</td>
-                    <td>Web Development</td>
-                    <td>Prof.Namal</td>
-                    <td>2025/05/10</td>
-                    <td><span class="badge bg-success-subtle text-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>SE1120</td>
-                    <td>Web Development</td>
-                    <td>Prof.Namal</td>
-                    <td>2025/05/10</td>
-                    <td><span class="badge bg-success-subtle text-success">Active</span></td>
-                </tr>
+                <%
+                    }
+                %>
                 </tbody>
             </table>
         </div>
