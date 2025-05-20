@@ -111,7 +111,11 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         long maxId = 0;
-
+        for (Student student : students) {
+            if (student.getStudentId() > maxId) {
+                maxId = student.getStudentId();
+            }
+        }
         return maxId + 1;
     }
 }
