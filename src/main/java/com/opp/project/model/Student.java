@@ -39,7 +39,7 @@ public class Student {
     public String getPassword() { return password; }
     public LocalDateTime getRegistrationTime() { return registrationTime; }
 
-    // Format student data as a string for file storage
+    // Formatting student data as a string for file storage
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -61,8 +61,8 @@ public class Student {
             throw new IllegalArgumentException("Invalid student ID format: " + parts[0], e);
         }
 
-        // Handle the registrationTime field with potential variations
-        String dateTimeStr = parts[8].trim(); // Trim any extra spaces
+        // Handle the registrationTime field
+        String dateTimeStr = parts[8].trim();
         LocalDateTime registrationTime;
         try {
             // First try the standard format
