@@ -16,7 +16,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-`
+
 <%@ include file="Admin-navbar.jsp"%>
 <main>
   <div class="container">
@@ -123,7 +123,7 @@
 
 <footer>
   <div class="footer-content">
-    <p>© 2025 Admin Panel. All rights reserved.</p>
+    <p>©️ 2025 Admin Panel. All rights reserved.</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
   </div>
 </footer>
@@ -170,7 +170,7 @@
     const password = prompt("Enter new password (leave blank to keep current):");
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'UpdateAdminServlet';
+    form.action = 'EditAdminServlet';
     form.style.display = 'none';
 
     const idInput = document.createElement('input');

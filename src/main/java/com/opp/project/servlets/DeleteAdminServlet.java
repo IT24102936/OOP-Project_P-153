@@ -16,13 +16,13 @@ public class DeleteAdminServlet extends HttpServlet {
         String id = request.getParameter("id");
 
         if (id == null || id.trim().isEmpty()) {
-            response.sendRedirect("Admin-managemant.jsp?errorMessage=Invalid admin ID");
+            response.sendRedirect("Admin-management.jsp?errorMessage=Invalid admin ID");
             return;
         }
 
         try {
             if (id.equals("1")) {
-                response.sendRedirect("Admin-managemant.jsp?errorMessage=Admin with ID 1 cannot be deleted");
+                response.sendRedirect("Admin-management.jsp?errorMessage=Admin with ID 1 cannot be deleted");
                 return;
             }
 
@@ -37,14 +37,14 @@ public class DeleteAdminServlet extends HttpServlet {
             }
 
             if (!removed) {
-                response.sendRedirect("Admin-managemant.jsp?errorMessage=Admin not found");
+                response.sendRedirect("Admin-management.jsp?errorMessage=Admin not found");
                 return;
             }
 
             AdminFileUtil.writeAdmins(admins);
-            response.sendRedirect("Admin-managemant.jsp?successMessage=Admin with ID " + id + " deleted successfully");
+            response.sendRedirect("Admin-management.jsp?successMessage=Admin with ID " + id + " deleted successfully");
         } catch (Exception e) {
-            response.sendRedirect("Admin-managemant.jsp?errorMessage=Error deleting admin: " + e.getMessage());
+            response.sendRedirect("Admin-management.jsp?errorMessage=Error deleting admin: " + e.getMessage());
             e.printStackTrace();
         }
     }
