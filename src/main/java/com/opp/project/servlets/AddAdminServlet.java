@@ -21,7 +21,7 @@ public class AddAdminServlet extends HttpServlet {
                 username == null || username.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()) {
-            response.sendRedirect("Admin-managemant.jsp?errorMessage=All fields are required");
+            response.sendRedirect("Admin-management.jsp?errorMessage=All fields are required");
             return;
         }
 
@@ -29,16 +29,16 @@ public class AddAdminServlet extends HttpServlet {
             // Check if username already exists
             for (String[] admin : AdminFileUtil.readAdmins()) {
                 if (admin[2].equals(username)) {
-                    response.sendRedirect("Admin-managemant.jsp?errorMessage=Username already exists");
+                    response.sendRedirect("Admin-management.jsp?errorMessage=Username already exists");
                     return;
                 }
             }
 
             // Save the new admin with auto-generated ID and hashed password
             AdminFileUtil.saveAdmin(name.trim(), username.trim(), email.trim(), password.trim());
-            response.sendRedirect("Admin-managemant.jsp?successMessage=Admin added successfully with ID " + AdminFileUtil.getNextAdminId());
+            response.sendRedirect("Admin-management.jsp?successMessage=Admin added successfully with ID " + AdminFileUtil.getNextAdminId());
         } catch (Exception e) {
-            response.sendRedirect("Admin-managemant.jsp?errorMessage=Error adding admin: " + e.getMessage());
+            response.sendRedirect("Admin-management.jsp?errorMessage=Error adding admin: " + e.getMessage());
             e.printStackTrace();
         }
     }
