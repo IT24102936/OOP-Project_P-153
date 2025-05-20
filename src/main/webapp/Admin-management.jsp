@@ -123,7 +123,7 @@
 
 <footer>
   <div class="footer-content">
-    <p>© 2025 Admin Panel. All rights reserved.</p>
+    <p>©️ 2025 Admin Panel. All rights reserved.</p>
     <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
   </div>
 </footer>
@@ -170,7 +170,7 @@
     const password = prompt("Enter new password (leave blank to keep current):");
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'UpdateAdminServlet';
+    form.action = 'EditAdminServlet';
     form.style.display = 'none';
 
     const idInput = document.createElement('input');
