@@ -1,32 +1,20 @@
 package com.opp.project.servlets;
 
+import com.opp.project.util.ContactFileUtil;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet("/ContactServlet")
 public class ContactServlet extends HttpServlet {
-    private static final String USER_HOME = System.getProperty("user.home");
-    private static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OPP-Project_P-153/src/main/resources/data";
-    private static final String CONTACTS_FILE_PATH = APP_DATA_DIR + File.separator + "contacts.txt";
-
-    static {
-        // Ensure the data directory exists
-        File dir = new File(APP_DATA_DIR);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userIdentifier = (String) session.getAttribute("userIdentifier");
@@ -56,17 +44,17 @@ public class ContactServlet extends HttpServlet {
 
         // Format the current date (without time)
         LocalDateTime now = LocalDateTime.now();
-        String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Changed to only date
+        String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        // Prepare the data to save (comma-separated, escaping commas in message)
-        String sanitizedMessage = message.replace(",", "\\,");
-        String dataLine = String.format("%s,%s,%s,%s,%s", name, email, subject, sanitizedMessage, date);
+        // Prepare the contact data
+        String[] contactData = new String[]{name, email, subject, message, date};
 
-        // Save to contacts.txt
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CONTACTS_FILE_PATH, true))) {
-            bw.write(dataLine);
-            bw.newLine();
-        } catch (IOException e) {
+        // Save to contacts.txt using ContactFileUtil
+        try {
+            List<String[]> contacts = ContactFileUtil.readContacts();
+            contacts.add(contactData);
+            ContactFileUtil.writeContacts(contacts);
+        } catch (Exception e) {
             System.err.println("Error saving to contacts.txt: " + e.getMessage());
             request.setAttribute("errorMessage", "Error saving your message. Please try again.");
             request.getRequestDispatcher("contactform.jsp").forward(request, response);

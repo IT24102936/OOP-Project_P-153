@@ -39,7 +39,7 @@ public class Student {
     public String getPassword() { return password; }
     public LocalDateTime getRegistrationTime() { return registrationTime; }
 
-    // Formatting student data as a string for file storage
+    // F+qwmtorage
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

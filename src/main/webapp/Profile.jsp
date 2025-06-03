@@ -153,7 +153,7 @@
         <p><strong>Gender:</strong> <%= currentUser.getGender() %></p>
         <div class="buttons">
           <a href="<%=request.getContextPath()%>/Profile.jsp?editMode=true" class="button edit"><i class="bi bi-pencil-square"></i> Edit</a>
-          <a href="#" class="button delete"><i class="bi bi-trash3"></i> Delete</a>
+<%--          <a href="#" class="button delete"><i class="bi bi-trash3"></i> Delete</a>--%>
         </div>
         <% } %>
       </div>

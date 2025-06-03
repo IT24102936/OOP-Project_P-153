@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Contacts</title>
-  <!-- custom css file   -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin-requestlist.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin-contactus.css">
   <link rel="stylesheet" href="<%=request.getContextPath()%>css/admin-navbar.css">
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -83,9 +82,6 @@
 </div>
 
 <script>
-  function logout() {
-    alert('Logout functionality to be implemented.');
-  }
 
   const hamburger = document.querySelector('.hamburger');
   const navUl = document.querySelector('nav ul');

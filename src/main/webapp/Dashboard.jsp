@@ -71,11 +71,10 @@
           List<String> enrolledCourseIds = CourseFileUtil.getEnrolledCourseIds(studentId);
           List<String[]> courses = CourseFileUtil.readCourses();
           List<String[]> enrolledCourses = new ArrayList<>();
-
           // Match enrolled course IDs with course details
           for (String courseId : enrolledCourseIds) {
             for (String[] course : courses) {
-              if (course[2].equals(courseId)) {
+              if (course[0].equals(courseId)) {
                 enrolledCourses.add(course);
               }
             }
@@ -90,8 +89,8 @@
           for (String[] course : enrolledCourses) {
             String imgPath = course[5];
             String courseName = course[1];
-            String courseId = course[2];
-            String instructor = course[3];
+            String courseId = course[0];
+            String instructor = course[2];
         %>
         <div class="card">
           <img src="<%= imgPath %>" alt="course_img">

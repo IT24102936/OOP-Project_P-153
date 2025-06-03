@@ -47,6 +47,11 @@
       font-size: 16px;
       cursor: pointer;
     }
+
+    .disabled-action {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -54,13 +59,6 @@
 <main>
   <div class="container">
     <h2>Request List</h2>
-    <div class="search-container">
-      <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" id="searchInput" placeholder="Search requests...">
-        <i class="bi bi-search"></i>
-      </div>
-    </div>
     <div class="table-container">
       <table>
         <thead>
@@ -77,12 +75,14 @@
         <%@ page import="com.opp.project.service.QueueManager" %>
         <%
           java.util.List<String[]> requests = QueueManager.getQueueState();
+          boolean frontProcessed = false;
           for (String[] requestData : requests) {
             String requestId = requestData[0];
             String studentId = requestData[1];
             String courseId = requestData[2];
             String timestamp = requestData[3];
             String status = requestData[4];
+            boolean isFront = requests.indexOf(requestData) == 0;
         %>
         <tr>
           <td><%= requestId %></td>
@@ -91,21 +91,25 @@
           <td><%= timestamp %></td>
           <td><%= status %></td>
           <td class="actions">
+            <% if (isFront && !frontProcessed) { %>
             <form action="ProcessRequestServlet" method="POST" style="display:inline;">
-              <input type="hidden" name="requestId" value="<%= requestId %>">
               <input type="hidden" name="action" value="approve">
               <button type="submit" class="edit-btn">Approve</button>
             </form>
             <form action="ProcessRequestServlet" method="POST" style="display:inline;">
-              <input type="hidden" name="requestId" value="<%= requestId %>">
               <input type="hidden" name="action" value="reject">
               <button type="submit" class="delete-btn">Reject</button>
             </form>
             <form action="ProcessRequestServlet" method="POST" style="display:inline;">
-              <input type="hidden" name="requestId" value="<%= requestId %>">
               <input type="hidden" name="action" value="delete">
               <button type="submit" class="delete-btn">Delete</button>
             </form>
+            <% frontProcessed = true; %>
+            <% } else { %>
+            <span class="disabled-action">Approve</span>
+            <span class="disabled-action">Reject</span>
+            <span class="disabled-action">Delete</span>
+            <% } %>
           </td>
         </tr>
         <%
@@ -157,28 +161,6 @@
       navUl.classList.toggle('active');
     });
   }
-
-  document.getElementById('searchInput').addEventListener('keyup', function(e) {
-    const searchTerm = e.target.value.trim().toLowerCase();
-    const tableBody = document.getElementById('requestTableBody');
-    const rows = tableBody.getElementsByTagName('tr');
-
-    Array.from(rows).forEach(row => {
-      const requestId = row.cells[0].textContent.toLowerCase();
-      const studentId = row.cells[1].textContent.toLowerCase();
-      const courseId = row.cells[2].textContent.toLowerCase();
-      const timestamp = row.cells[3].textContent.toLowerCase();
-      const status = row.cells[4].textContent.toLowerCase();
-
-      const isMatch = requestId.includes(searchTerm) ||
-              studentId.includes(searchTerm) ||
-              courseId.includes(searchTerm) ||
-              timestamp.includes(searchTerm) ||
-              status.includes(searchTerm);
-
-      row.style.display = isMatch || searchTerm === '' ? '' : 'none';
-    });
-  });
 
   document.addEventListener('DOMContentLoaded', () => {
     const toast = document.querySelector('.toast');

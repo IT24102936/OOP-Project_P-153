@@ -3,6 +3,7 @@
 <%@ page import="com.opp.project.util.CourseFileUtil" %>
 <%@ page import="com.opp.project.util.AnnouncementFileUtil" %>
 <%@ page import="com.opp.project.util.FileUtil" %>
+<%@ page import="com.opp.project.util.RequestFileUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.opp.project.model.Student" %>
@@ -78,7 +79,11 @@
                     </div>
                     <div class="management-card stat-card stat3">
 <%--                        <i class="fas fa-file-alt"></i>--%>
-                        <div class="stat-value">5</div>
+                        <%
+                            List<String[]> pendingrequest = RequestFileUtil.readRequests();
+                            int reqcount = pendingrequest.size();
+                        %>
+                        <div class="stat-value"><%=reqcount%></div>
                         <p>Pending Requests</p>
                     </div>
                 </div>

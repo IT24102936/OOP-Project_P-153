@@ -17,7 +17,6 @@
 </head>
 
 <body>
-
 <%@ include file="Admin-navbar.jsp"%>
 <main>
   <div class="container">
@@ -171,7 +170,7 @@
     const password = prompt("Enter new password (leave blank to keep current):");
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'EditAdminServlet';
+    form.action = 'UpdateAdminServlet';
     form.style.display = 'none';
 
     const idInput = document.createElement('input');

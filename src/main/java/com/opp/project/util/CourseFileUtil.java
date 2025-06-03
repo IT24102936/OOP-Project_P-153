@@ -8,10 +8,10 @@ import java.util.List;
 
 public class CourseFileUtil {
     public static final String USER_HOME = System.getProperty("user.home");
-    public static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OPP-Project_P-153/src/main/resources/data";
+    public static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OOP-Project_P-153/src/main/resources/data";
     public static final String COURSES_FILE_PATH;
     public static final String ENROLLMENTS_FILE_PATH;
-    public static final String COURSE_IMG_PATH = USER_HOME + File.separator + "Desktop/Project/OPP-Project_P-153/src/main/webapp/Course_img";
+    public static final String COURSE_IMG_PATH = USER_HOME + File.separator + "Desktop/Project/OOP-Project_P-153/src/main/webapp/Course_img";
 
     static {
         File dir = new File(APP_DATA_DIR);

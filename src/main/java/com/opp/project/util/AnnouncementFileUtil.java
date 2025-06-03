@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AnnouncementFileUtil {
     public static final String USER_HOME = System.getProperty("user.home");
-    public static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OPP-Project_P-153/src/main/resources/data";
+    public static final String APP_DATA_DIR = USER_HOME + File.separator + "Desktop/Project/OOP-Project_P-153/src/main/resources/data";
     public static final String ANNOUNCEMENTS_FILE_PATH = APP_DATA_DIR + File.separator + "announcements.txt";
 
     static {

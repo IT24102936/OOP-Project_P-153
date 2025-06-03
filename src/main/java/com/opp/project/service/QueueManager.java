@@ -46,12 +46,12 @@ class CircularQueue extends Queue {
     @Override
     public void enqueue(String request) {
         if (isFull()) {
-            dequeue();
+            System.out.println("Queue is full, cannot enqueue request: " + request);
         } else {
+            rear = (rear + 1) % maxSize;
+            queue[rear] = request;
             currentSize++;
         }
-        rear = (rear + 1) % maxSize;
-        queue[rear] = request;
     }
 
     @Override

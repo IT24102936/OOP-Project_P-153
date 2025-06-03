@@ -55,7 +55,7 @@
     <h2>User List</h2>
     <div class="search-container">
       <div class="search-bar">
-        <i class="fas fa-search"></i>
+<%--        <i class="fas fa-search"></i>--%>
         <input type="text" id="searchInput" placeholder="Search users...">
         <i class="bi bi-search"></i>
       </div>
@@ -86,7 +86,7 @@
         <td><%= student.getEmail() %></td>
         <td class="actions">
           <a href="<%=request.getContextPath()%>/Admin-useredit.jsp?studentId=<%= student.getStudentId() %>" class="edit-btn btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-          <button class="delete-btn btn btn-danger btn-sm" onclick="confirmDelete(<%= student.getStudentId() %>, '<%= student.getFullName() %>')"><i class="fa-solid fa-trash-xmark"></i> Delete</button>
+          <button class="delete-btn btn btn-danger btn-sm" onclick="confirmDelete(<%= student.getStudentId() %>, '<%= student.getFullName() %>')"><i class="bi bi-trash"></i> Delete</button>
         </td>
       </tr>
       <%
